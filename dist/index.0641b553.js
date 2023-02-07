@@ -557,6 +557,111 @@ function hmrAccept(bundle, id) {
 }
 
 },{}],"bNKaB":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+var _userJs = require("./User.js");
+var _userJsDefault = parcelHelpers.interopDefault(_userJs);
+const users = [];
+/*const getProfiles = () => {
+    const request = new XMLHttpRequest();
+    request.open("GET", `https://randomuser.me/api/?results=20`);
+    request.send();
+    request.addEventListener("load", e => {
+        const data = JSON.parse(request.responseText);
+        console.log(data);
+       /* data.results.forEach(element => {
+            cleanData(element);
+        });*/ async function getData() {
+    try {
+        const res = await fetch("https://randomuser.me/api/?results=20");
+        const data = await res.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+/*const parseData = (rawData) => {
+    const { results } = JSON.parse(rawData);
+    const cleanData = results.map((el) => {
+        const title = el.name.title;
+        const firstName = el.name.first;
+        const lastName = el.name.last;
+        const city = el.location.city;
+        const country = el.location.country;
+    });
+    return cleanData;
+  };*/ async function render() {
+    const data = await getData();
+    /*const data2 = JSON.parse(data);*/ const main = document.querySelector("main");
+    data.results.forEach((element)=>{
+        const newUser = new (0, _userJsDefault.default)(name.title, name.first, name.last, location.city, location.country);
+        main.appendChild(newUser.afficheUser());
+    });
+}
+render();
+
+},{"./User.js":"3Nf0z","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3Nf0z":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class User {
+    constructor(title, firstName, lastName, city, country){
+        this.title = title;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.city = city;
+        this.country = country;
+        this.present = false;
+    }
+    afficheUser() {
+        /*const containerElement = document.createElement("section");
+        containerElement.innerHTML = '';*/ const userCard = document.createElement("div");
+        userCard.classList.add("user");
+        userCard.innerHTML = `
+          <div class="user" data-present="${this.present}">
+          <div class="user--info">
+                  <h1>${this.title} ${this.firstName} ${this.lastName}</h1>
+                  <p>10 years old</p>
+                  <p>${this.city}, ${this.country}</p>
+          </div>
+          <a href="mailto:test">
+                  <span class="mail">✉️</span>
+          </a>
+        </div>
+          `;
+        return userCard;
+    }
+}
+exports.default = User;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
 
 },{}]},["lKzq4","bNKaB"], "bNKaB", "parcelRequirec56a")
 
